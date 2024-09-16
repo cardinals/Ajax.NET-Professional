@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="12.0">
   <PropertyGroup>
     <ProjectType>Local</ProjectType>
     <ProductVersion>9.0.30729</ProductVersion>
@@ -11,7 +11,7 @@
     </ApplicationIcon>
     <AssemblyKeyContainerName>
     </AssemblyKeyContainerName>
-    <AssemblyName>AjaxPro</AssemblyName>
+    <AssemblyName>AjaxPro.2</AssemblyName>
     <AssemblyOriginatorKeyFile>
     </AssemblyOriginatorKeyFile>
     <DefaultClientScript>JScript</DefaultClientScript>
@@ -33,7 +33,8 @@
     <SccProvider>SAK</SccProvider>
     <SignAssembly>false</SignAssembly>
     <OldToolsVersion>3.5</OldToolsVersion>
-    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <OutputPath>bin\Debug\</OutputPath>
@@ -59,6 +60,7 @@
     <ErrorReport>prompt</ErrorReport>
     <RunCodeAnalysis>false</RunCodeAnalysis>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <OutputPath>bin\Release\</OutputPath>
@@ -83,6 +85,19 @@
     <DebugType>none</DebugType>
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'ReleaseNET48|AnyCPU'">
+    <OutputPath>bin\ReleaseNET48\</OutputPath>
+    <DefineConstants>TRACE;NET20</DefineConstants>
+    <BaseAddress>285212672</BaseAddress>
+    <Optimize>true</Optimize>
+    <FileAlignment>4096</FileAlignment>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System">
@@ -127,10 +142,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Attributes\AjaxNoTypeUsageAttribute.cs" />
-    <Compile Include="Attributes\__AjaxClassAttribute.cs">
+    <Compile Include="Attributes\AjaxClassAttribute.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Attributes\__AjaxEnumAttribute.cs">
+    <Compile Include="Attributes\AjaxEnumAttribute.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Configuration\AjaxSettingsSectionHandler.cs">
@@ -249,10 +264,6 @@
     <Compile Include="Security\EncryptTransformer.cs" />
     <Compile Include="Security\WebDecrypter.cs" />
     <Compile Include="Security\WebEncrypter.cs" />
-    <Compile Include="Services\AuthenticationService.cs" />
-    <Compile Include="Services\CartService.cs" />
-    <Compile Include="Services\ChatService.cs" />
-    <Compile Include="Services\ProfileService.cs" />
     <Compile Include="Utilities\AjaxSettings.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -263,7 +274,7 @@
     <Compile Include="Utilities\Constant.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Utilities\MD5Helper.cs">
+    <Compile Include="Utilities\HashHelper.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Utilities\Utility.cs">
@@ -277,17 +288,22 @@
     <EmbeddedResource Include="core.js" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="build_1.1.bat" />
-    <None Include="build_2.0.bat" />
+    <None Include="bundleconfig.json" />
     <None Include="web.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="build.bat" />
-    <None Include="build_json.bat" />
     <EmbeddedResource Include="ms.js" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="jquery-1.3.1.js" />
+    <EmbeddedResource Include="core.min.js">
+      <DependentUpon>core.js</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ms.min.js">
+      <DependentUpon>ms.js</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="prototype.min.js">
+      <DependentUpon>prototype.js</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
